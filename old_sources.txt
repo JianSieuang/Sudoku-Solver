@@ -1,0 +1,261 @@
+            <tr>
+                <td class="tl">
+                    <input id="s0r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="t">
+                    <input id="s0r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s0r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tl">
+                    <input id="s1r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="t">
+                    <input id="s1r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s1r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tl">
+                    <input id="s2r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="t">
+                    <input id="s2r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s2r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="l">
+                    <input id="s0r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="m">
+                    <input id="s0r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s0r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="l">
+                    <input id="s1r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="m">
+                    <input id="s1r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s1r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="l">
+                    <input id="s2r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="m">
+                    <input id="s2r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s2r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="bl">
+                    <input id="s0r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="b">
+                    <input id="s0r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s0r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="bl">
+                    <input id="s1r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="b">
+                    <input id="s1r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s1r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="bl">
+                    <input id="s2r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="b">
+                    <input id="s2r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s2r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="tl">
+                    <input id="s3r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="t">
+                    <input id="s3r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s3r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tl">
+                    <input id="s4r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="t">
+                    <input id="s4r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s4r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tl">
+                    <input id="s5r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="t">
+                    <input id="s5r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s5r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="l">
+                    <input id="s3r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="m">
+                    <input id="s3r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s3r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="l">
+                    <input id="s4r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="m">
+                    <input id="s4r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s4r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="l">
+                    <input id="s5r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="m">
+                    <input id="s5r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s5r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="bl">
+                    <input id="s3r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="b">
+                    <input id="s3r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s3r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="bl">
+                    <input id="s4r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="b">
+                    <input id="s4r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s4r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="bl">
+                    <input id="s5r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="b">
+                    <input id="s5r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s5r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="tl">
+                    <input id="s6r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="t">
+                    <input id="s6r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s6r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tl">
+                    <input id="s7r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="t">
+                    <input id="s7r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s7r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tl">
+                    <input id="s8r0c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="t">
+                    <input id="s8r0c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="tr">
+                    <input id="s8r0c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="l">
+                    <input id="s6r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="m">
+                    <input id="s6r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s6r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="l">
+                    <input id="s7r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="m">
+                    <input id="s7r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s7r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="l">
+                    <input id="s8r1c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="m">
+                    <input id="s8r1c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="r">
+                    <input id="s8r1c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
+            <tr>
+                <td class="bl">
+                    <input id="s6r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="b">
+                    <input id="s6r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s6r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="bl">
+                    <input id="s7r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="b">
+                    <input id="s7r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s7r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="bl">
+                    <input id="s8r2c0" type="text" autocomplete="off" maxlength="1">
+                </td>            
+                <td class="b">
+                    <input id="s8r2c1" type="text" autocomplete="off" maxlength="1">
+                </td>
+                <td class="br">
+                    <input id="s8r2c2" type="text" autocomplete="off" maxlength="1">
+                </td>
+            </tr>
