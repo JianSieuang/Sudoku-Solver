@@ -19,11 +19,12 @@ function addElement() {
             newTr.appendChild(newTd)
 
             let newInput = document.createElement("input")
-            newInput.setAttribute("type", "text")
+            newInput.setAttribute("id", j + i*9)
+            newInput.setAttribute("type", "type")
             newInput.setAttribute("autocomplete", "off")
             newInput.setAttribute("maxlength", "1")
             newTd.appendChild(newInput)
         }
     }
-    
-} 
+}
+

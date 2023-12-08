@@ -6,26 +6,49 @@ let row = 3;
 let column = 3;
 let checkrow = [];//[which row][which box]
 let checkcol = [];
-const inputs = document.querySelectorAll(`input`);
 
-inputs.forEach( input => {
-    input.addEventListener(`input`, next_input =>{
-        let parentTag = input.parentNode.nextSibling;   
-        while(parentTag){
-            if(parentTag.nodeName === 'TD'){
-                const nextInput = parentTag.querySelector('input');
+setTimeout(() =>{
+    const inputs = document.querySelectorAll("input"); 
 
-                if(nextInput){
-                    nextInput.focus();
-                    break;
-                }
+    inputs.forEach( (input, index) => {
+        input.addEventListener(`input`, () =>{
+            if (!(input.value > 0)) {
+                input.value = ""    
+            } 
+            else if (index < inputs.length-1) {
+                inputs[index+1].focus()
             }
-            parentTag = parentTag.nextSibling;
-        }
+        });
+
+        input.addEventListener(`keydown`, (e) =>{
+            switch(e.key) {
+                case "ArrowLeft":
+                    if(index > 0)
+                        inputs[index-1].focus()
+                    else 
+                        inputs[inputs.length-1].focus()
+                    break
+                case "ArrowRight":
+                    if(index < inputs.length-1)
+                        inputs[index+1].focus()
+                    else
+                        inputs[0].focus()
+                    break
+                case "ArrowUp":
+                    if(index > 8)
+                        inputs[index-9].focus()
+                    break
+                case "ArrowDown":
+                    if(index < inputs.length - 9)
+                        inputs[index+9].focus()
+                    break
+            }
+        });
     });
-});
+}, 500)
 
 function hide(){
+    return false;
     for(let i = 0; i < square; i++){
         sudoku[i] = [];
         for(let j = 0; j < row; j++){
@@ -43,6 +66,7 @@ function hide(){
 }
 
 function resetInput(){
+    return false;
     for(let i = 0; i < square; i++){
         sudoku[i] = [];
         for(let j = 0; j < row; j++){
@@ -63,7 +87,9 @@ function resetInput(){
 //give ture for specific numbers then check the row and column.
 
 function showAns(){
+    return false;
     for(let i = 0; i < square; i++){
+        
         //i = small square
         sudoku[i] = [];
         checkcol[i] = [];

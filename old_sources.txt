@@ -1,3 +1,4 @@
+            html table content 
             <tr>
                 <td class="tl">
                     <input id="s0r0c0" type="text" autocomplete="off" maxlength="1">
@@ -259,3 +260,18 @@
                     <input id="s8r2c2" type="text" autocomplete="off" maxlength="1">
                 </td>
             </tr>
+
+            js nextSibling
+            let parentTag = input.parentNode.nextSibling; 
+            console.log(parentTag)  
+            while(parentTag){
+                if(parentTag.nodeName == 'TD'){
+                    const nextInput = parentTag.querySelector('input');
+
+                    if(nextInput){
+                        nextInput.focus();
+                        break;  
+                    }
+                }
+                parentTag = parentTag.nextSibling;
+            }
