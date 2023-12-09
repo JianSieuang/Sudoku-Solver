@@ -1,4 +1,4 @@
-            html table content 
+html table content 
             <tr>
                 <td class="tl">
                     <input id="s0r0c0" type="text" autocomplete="off" maxlength="1">
@@ -261,7 +261,7 @@
                 </td>
             </tr>
 
-            js nextSibling
+js nextSibling
             let parentTag = input.parentNode.nextSibling; 
             console.log(parentTag)  
             while(parentTag){
@@ -275,3 +275,18 @@
                 }
                 parentTag = parentTag.nextSibling;
             }
+
+js reset data
+    for(let i = 0; i < square; i++){
+        sudoku[i] = [];
+        for(let j = 0; j < row; j++){
+            sudoku[i][j] = [];
+            for(let k = 0; k < column; k++){
+                sudoku[i][j][k] = document.getElementById(`s${i}r${j}c${k}`);
+                //remove ALL
+                sudoku[i][j][k].value = "";
+                sudoku[i][j][k].style.color = "black"; 
+            }
+        }
+    }
+    return false;

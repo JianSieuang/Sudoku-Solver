@@ -1,9 +1,7 @@
 document.body.onload = addElement
-const position = ["tl", "t", "tr",
-                  "l", "m", "r",
-                  "bl", "b", "br"]
 
 function addElement() {
+    let position = ["tl", "t", "tr","l", "m", "r", "bl", "b", "br"]
     let row = 9
     let column = 9
 
@@ -20,7 +18,8 @@ function addElement() {
 
             let newInput = document.createElement("input")
             newInput.setAttribute("id", j + i*9)
-            newInput.setAttribute("type", "type")
+            newInput.setAttribute("type", "text")
+            newInput.setAttribute("onClick", "this.select()")
             newInput.setAttribute("autocomplete", "off")
             newInput.setAttribute("maxlength", "1")
             newTd.appendChild(newInput)

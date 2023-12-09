@@ -1,51 +1,11 @@
-let num = [];
-let sudoku = [];
+let sudoku = Array(9).fill().map(() => 
+             Array(9).fill(""));
 let square = 9;
 let squareroot = Math.sqrt(square);
 let row = 3;
 let column = 3;
 let checkrow = [];//[which row][which box]
 let checkcol = [];
-
-setTimeout(() =>{
-    const inputs = document.querySelectorAll("input"); 
-
-    inputs.forEach( (input, index) => {
-        input.addEventListener(`input`, () =>{
-            if (!(input.value > 0)) {
-                input.value = ""    
-            } 
-            else if (index < inputs.length-1) {
-                inputs[index+1].focus()
-            }
-        });
-
-        input.addEventListener(`keydown`, (e) =>{
-            switch(e.key) {
-                case "ArrowLeft":
-                    if(index > 0)
-                        inputs[index-1].focus()
-                    else 
-                        inputs[inputs.length-1].focus()
-                    break
-                case "ArrowRight":
-                    if(index < inputs.length-1)
-                        inputs[index+1].focus()
-                    else
-                        inputs[0].focus()
-                    break
-                case "ArrowUp":
-                    if(index > 8)
-                        inputs[index-9].focus()
-                    break
-                case "ArrowDown":
-                    if(index < inputs.length - 9)
-                        inputs[index+9].focus()
-                    break
-            }
-        });
-    });
-}, 500)
 
 function hide(){
     return false;
@@ -66,25 +26,22 @@ function hide(){
 }
 
 function resetInput(){
-    return false;
-    for(let i = 0; i < square; i++){
-        sudoku[i] = [];
-        for(let j = 0; j < row; j++){
-            sudoku[i][j] = [];
-            for(let k = 0; k < column; k++){
-                sudoku[i][j][k] = document.getElementById(`s${i}r${j}c${k}`);
-                //remove ALL
-                sudoku[i][j][k].value = "";
-                sudoku[i][j][k].style.color = "black"; 
-            }
-        }
-    }
+    let inputs = document.querySelectorAll("input")
+    inputs.forEach((input, index) =>{
+        input.value = ""
+        sudoku[(index / Math.sqrt(inputs.length)) | 0][index % Math.sqrt(inputs.length)] = input.value
+    })
+    
     return false;
 }
 
 //the final logic for sudoku is if just only one box inside a small square can put that number, then put the number.
-//using checkrow or col to determine the left number in that row or column.
+//using checkrow or col to determine the remain number in that row or column.
 //give ture for specific numbers then check the row and column.
+
+//update what i am saying previous cus idk what i said
+//maybe is this logic only can function when there is one answer for one box  
+
 
 function showAns(){
     return false;
