@@ -13,13 +13,13 @@ setTimeout(() =>{
                 }
             }
             
-        })
+        })  
 
         input.addEventListener(`keydown`, (e) =>{
             switch(e.key) {
                 case "ArrowLeft":
                     if(index > 0)
-                        inputs[index-1].focus()
+                        inputs[index - 1].focus()
                     else 
                         inputs[inputs.length - 1].focus()
                     break
@@ -30,12 +30,12 @@ setTimeout(() =>{
                         inputs[0].focus()
                     break
                 case "ArrowUp":
-                    if(index > 8)
-                        inputs[index - 9].focus()
+                    if(index >  Math.sqrt(inputs.length) - 1)
+                        inputs[index -  Math.sqrt(inputs.length)].focus()
                     break
                 case "ArrowDown":
-                    if(index < inputs.length - 9)
-                        inputs[index + 9].focus()
+                    if(index < inputs.length -  Math.sqrt(inputs.length))
+                        inputs[index +  Math.sqrt(inputs.length)].focus()
                     break
             }
         })

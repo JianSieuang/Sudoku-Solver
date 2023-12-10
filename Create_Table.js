@@ -1,23 +1,25 @@
-document.body.onload = addElement
+document.body.onload = addElement(9)
 
-function addElement() {
+function addElement(num) {
     let position = ["tl", "t", "tr","l", "m", "r", "bl", "b", "br"]
-    let row = 9
-    let column = 9
+    let size = num
+    let boxsize = Math.sqrt(size)
 
     // create table
-    for (let i = 0; i < row; i++) {
+    for (let i = 0; i < size; i++) {
         let newTr = document.createElement("tr")
         newTr.setAttribute("id", `r${i}`)
+
         let parrentTable = document.getElementById("mainContent")
         parrentTable.appendChild(newTr)
-        for (let j = 0; j < column; j++) {
+
+        for (let j = 0; j < size; j++) {
             let newTd = document.createElement("td")
-            newTd.setAttribute("class", `${position[(j % 3) + (i % 3) * 3]}`)  
+            newTd.setAttribute("class", `${position[(j % boxsize) + (i % boxsize) * boxsize]}`)  
             newTr.appendChild(newTd)
 
             let newInput = document.createElement("input")
-            newInput.setAttribute("id", j + i*9)
+            newInput.setAttribute("id", j + i*size)
             newInput.setAttribute("type", "text")
             newInput.setAttribute("onClick", "this.select()")
             newInput.setAttribute("autocomplete", "off")

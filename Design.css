@@ -38,7 +38,11 @@
         background-position: center;
     }
 }
-    
+
+* {
+    margin: 0;
+}
+
 body {
     zoom: 1.5;
     font-family: Arial, Helvetica, sans-serif;
@@ -49,9 +53,31 @@ body {
     animation-direction: alternate; */
 } 
 
+#topNav {
+    display: flex;
+    background-color: black;
+    color: white;
+}
+
+#topNav svg {
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
 h1 {
-    text-align: center;
+    margin: 0 1%;
+    font-size: 25px;
+    justify-content: center;
+    align-items: center;  
 } 
+
+#list {
+    cursor: pointer;
+    position: absolute;
+    display: none;
+}
+
 
 input {
     width: 25px;
