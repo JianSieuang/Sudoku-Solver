@@ -1,9 +1,18 @@
-setTimeout(() =>{
-    const inputs = document.querySelectorAll("input")
+function changeSize(num) {
+    let table = document.getElementById("mainContent")
 
+    while (table.firstChild) {
+        table.removeChild(table.firstChild);
+    }
+
+    addElement(num)
+    sudoku = Array(num).fill().map(() => 
+             Array(num).fill(""));
+
+    const inputs = document.querySelectorAll("input")
     inputs.forEach( (input, index) => {
         input.addEventListener(`input`, () =>{        
-            if (!(input.value > 0)) {
+            if (!(input.value > 0 && input.value < num + 1)) {
                 input.value = ""    
             }
             else{
@@ -44,4 +53,4 @@ setTimeout(() =>{
             input.select()
         })
     })
-}, 100)
+}
