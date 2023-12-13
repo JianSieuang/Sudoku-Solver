@@ -31,9 +31,41 @@ function resetInput(){
         input.value = ""
         sudoku[(index / Math.sqrt(inputs.length)) | 0][index % Math.sqrt(inputs.length)] = input.value
     })
-    
     return false;
 }
+
+function checkAvailable() {
+    let row = new Map()
+    let col = new Map()
+    for (let i = 0; i < 9; i++) {
+        for (let j = 0; j < 9; j++) {
+            if (sudoku[i][j] != "") {
+                if (row.get(sudoku[i][j]) == undefined){
+                    row.set(sudoku[i][j], 0)
+                }
+                else {
+                    return false
+                }   
+            } 
+            if(sudoku[j][i] != "") {
+                if (col.get(sudoku[j][i]) == undefined) {
+                    col.set(sudoku[j][i], 0)
+                }
+                else {
+                    return false
+                }
+            }     
+        }
+        row.clear()
+        col.clear()
+    }
+
+    // 3*3 matrix haven't make
+
+    return true
+}
+
+
 
 //the final logic for sudoku is if just only one box inside a small square can put that number, then put the number.
 //using checkrow or col to determine the remain number in that row or column.
@@ -44,6 +76,11 @@ function resetInput(){
 
 
 function showAns(){
+    if (checkAvailable()){
+        console.log("Valid Sudoku")
+    } else {
+        console.log("Invalid Sudoku")
+    }
     return false;
     for(let i = 0; i < square; i++){
         

@@ -1,4 +1,8 @@
 setTimeout(() =>{
+    autoFocus()
+}, 100)
+
+function autoFocus() {
     const inputs = document.querySelectorAll("input")
     inputs.forEach( (input, index) => {
         input.addEventListener(`input`, () =>{        
@@ -36,6 +40,9 @@ setTimeout(() =>{
                     if(index < inputs.length -  Math.sqrt(inputs.length))
                         inputs[index +  Math.sqrt(inputs.length)].focus()
                     break
+                case "Backspace":
+                    sudoku[(index / Math.sqrt(inputs.length)) | 0][index % Math.sqrt(inputs.length)] = ""
+                    break
             }
         })
 
@@ -43,4 +50,4 @@ setTimeout(() =>{
             input.select()
         })
     })
-}, 100)
+}
