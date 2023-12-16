@@ -290,3 +290,109 @@ js reset data
         }
     }
     return false;
+
+js create sudoku value
+    for(let i = 0; i < square; i++){
+        //i = small square
+        sudoku[i] = [];
+        checkcol[i] = [];
+        checkrow[i] = [];        
+        for(let j = 0; j < row; j++){
+            //j = row
+            sudoku[i][j] = [];
+            checkcol[i][j] = 0;
+            checkrow[i][j] = 0; 
+            for(let k = 0; k < column; k++){
+                //k = column
+                sudoku[i][j][k] = document.getElementById(`s${i}r${j}c${k}`);
+            }
+        }
+    }
+
+js possible checking 
+    function probabilityCheck (sudoku, checkrow, checkcol, i, j, k){
+        let result = 0;
+        let possible = 0;
+        let probability = [];
+
+        for(let i = 0; i < square; i++){
+            probability[i] = true;
+        }
+
+        let x;//because of the naming style for small square box makes that need to be specific
+
+        //for checking row
+        x = i - i % squareroot;
+        for(let a = x; a < x + squareroot; a++){
+            for(let c = 0; c < squareroot; c++){
+                for(let p = 0; p < square; p++){
+                    if(sudoku[a][j][c].value == p + 1)
+                        probability[p] = false;
+                } 
+            }
+        }
+        //problem
+        // row
+        for(let b = 0; b < squareroot; b++){
+            if(i % squareroot == b){//skip the same square box
+                continue;
+            }
+            let store = checkrow[j + x][b];
+            for(;checkrow[j + x][b] > 0; checkrow[j + x][b] = Math.trunc(checkrow[j + x][b] / 10)){
+                probability[checkrow[j + x][b] % 10 - 1] = false;
+            }
+            checkrow[j + x][b] = store;
+        }
+
+        //for checking small square
+        for(let b = 0; b < squareroot; b++){
+            for(let c = 0; c < squareroot; c++){
+                for(let p = 0; p < square; p++){
+                    if(sudoku[i][b][c].value == p + 1)
+                        probability[p] = false;
+                }
+            }
+        }
+
+        //for checking column
+        x = i % squareroot;
+
+        for(let a = x; a < x + 1 + squareroot * (squareroot - 1); a += squareroot){
+            for(let b = 0; b < squareroot; b++){
+                for(let p = 0; p < square; p++){
+                if(sudoku[a][b][k].value == p + 1)
+                    probability[p] = false;
+                }
+            }
+        }
+
+        //problem
+        //column
+        for(let b = 0; b < squareroot; b++){
+            if(Math.trunc(i / 3) == b){//for skip the same square box
+                continue;
+            }
+            let store = checkcol[k + x * squareroot][b];
+            for(;checkcol[k + x * squareroot][b] > 0; checkcol[k + x * squareroot][b] = Math.trunc(checkcol[k + x * squareroot][b] / 10)){
+                probability[checkcol[k + x * squareroot][b] % 10 - 1] = false;
+            }
+            checkcol[k + x * squareroot][b] = store;
+        }
+
+        for(let p = 0; p < square; p++){
+            if(probability[p]){
+                result++;
+                possible = possible * 10 + p + 1;
+            }   
+        }
+
+        for(let p = 0; p < square; p++){
+            if(probability[p] && result == 1){
+                sudoku[i][j][k].value = p + 1;
+                sudoku[i][j][k].style.color = "blue";
+                //lol this is shit
+            }
+        }
+
+        return possible;
+    }

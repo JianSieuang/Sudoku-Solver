@@ -1,9 +1,48 @@
 document.body.onload = addElement(9)
 
 function addElement(num) {
-    let position = ["tl", "t", "tr","l", "m", "r", "bl", "b", "br"]
+    let position = [];
     let size = num
     let boxsize = Math.sqrt(size)
+
+    // create class name attribute for table 
+    for (let i = 0; i < boxsize; i++) {
+        for (let j = 0; j < boxsize; j++) {
+            if (i == 0) {
+                if (j == 0) {
+                    position[i*boxsize + j] = "tl"
+                }
+                else if (j == boxsize - 1) {
+                    position[i*boxsize + j] = "tr"
+                }
+                else {
+                    position[i*boxsize + j] = "t"
+                }
+            }
+            else if (i == boxsize - 1) {
+                if (j == 0) {
+                    position[i*boxsize + j] = "bl"
+                }
+                else if (j == boxsize - 1) {
+                    position[i*boxsize + j] = "br"
+                }
+                else {
+                    position[i*boxsize + j] = "b"
+                }
+            }
+            else {
+                if (j == 0) {
+                    position[i*boxsize + j] = "l"
+                }
+                else if (j == boxsize - 1) {
+                    position[i*boxsize + j] = "r"
+                }
+                else {
+                    position[i*boxsize + j] = "m"
+                }
+            }
+        }
+    }
 
     // create table
     for (let i = 0; i < size; i++) {

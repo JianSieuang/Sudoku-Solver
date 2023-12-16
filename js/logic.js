@@ -7,47 +7,23 @@ let column = 3;
 let checkrow = [];//[which row][which box]
 let checkcol = [];
 
-function hide(){
-    return false;
-    for(let i = 0; i < square; i++){
-        sudoku[i] = [];
-        for(let j = 0; j < row; j++){
-            sudoku[i][j] = [];
-            for(let k = 0; k < column; k++){
-                sudoku[i][j][k] = document.getElementById(`s${i}r${j}c${k}`);
-                if(sudoku[i][j][k].style.color == "blue"){//remove the ans
-                    sudoku[i][j][k].value = "";
-                    sudoku[i][j][k].style.color = "black"; 
-                }
-            }
-        }
-    }
-    return false;
-}
-
-function resetInput(){
-    let inputs = document.querySelectorAll("input")
-    inputs.forEach((input, index) =>{
-        input.value = ""
-        sudoku[(index / Math.sqrt(inputs.length)) | 0][index % Math.sqrt(inputs.length)] = input.value
-    })
-    return false;
-}
-
 function checkAvailable() {
-    let row = new Map()
+    let check = new Map()
     let col = new Map()
-    for (let i = 0; i < 9; i++) {
-        for (let j = 0; j < 9; j++) {
+    let box = Math.sqrt(sudoku.length)
+
+    // check row and col
+    for (let i = 0; i < sudoku.length; i++) {
+        for (let j = 0; j < sudoku.length; j++) {
             if (sudoku[i][j] != "") {
-                if (row.get(sudoku[i][j]) == undefined){
-                    row.set(sudoku[i][j], 0)
+                if (check.get(sudoku[i][j]) == undefined){
+                    check.set(sudoku[i][j], 0)
                 }
                 else {
                     return false
                 }   
             } 
-            if(sudoku[j][i] != "") {
+            if (sudoku[j][i] != "") {
                 if (col.get(sudoku[j][i]) == undefined) {
                     col.set(sudoku[j][i], 0)
                 }
@@ -56,51 +32,52 @@ function checkAvailable() {
                 }
             }     
         }
-        row.clear()
+        check.clear()
         col.clear()
     }
 
-    // 3*3 matrix haven't make
+    // check box
+    for (let i = 0; i < sudoku.length; i += box) {
+        for (let j = 0; j < sudoku.length; j += box) {
+            for (let r = 0; r < box; r++) {
+                for (let c = 0; c < box; c++) {
+                    if (sudoku[i + r][j + c] != "") {
+                        if (check.get(sudoku[i + r][j + c]) == undefined){
+                            check.set(sudoku[i + r][j + c], 0)
+                        }
+                        else {
+                            return false
+                        }
+                    }  
+                }
+            }
+            check.clear()
+        }
+    }
 
     return true
 }
 
-
-
-//the final logic for sudoku is if just only one box inside a small square can put that number, then put the number.
-//using checkrow or col to determine the remain number in that row or column.
-//give ture for specific numbers then check the row and column.
-
-//update what i am saying previous cus idk what i said
-//maybe is this logic only can function when there is one answer for one box  
-
+// this logic only can function when there is one answer for one grid  
 
 function showAns(){
-    if (checkAvailable()){
-        console.log("Valid Sudoku")
-    } else {
-        console.log("Invalid Sudoku")
-    }
-    return false;
-    for(let i = 0; i < square; i++){
-        
-        //i = small square
-        sudoku[i] = [];
-        checkcol[i] = [];
-        checkrow[i] = [];        
-        for(let j = 0; j < row; j++){
-            //j = row
-            sudoku[i][j] = [];
-            checkcol[i][j] = 0;
-            checkrow[i][j] = 0; 
-            for(let k = 0; k < column; k++){
-                //k = column
-                sudoku[i][j][k] = document.getElementById(`s${i}r${j}c${k}`);
-            }
+    // if checkAvailable is false (invalid sudoku), show the error and return false
+    console.log(checkAvailable()? "Valid Sudoku": "Invalid Sudoku")
+    
+
+    let notes = []
+    for (let i = 0; i < sudoku.length; i++) {
+        notes[i] = []
+        for (let j = 0; j < sudoku.length; j++) {
+            notes[i][j] = probabilityCheck(i, j)  
         }
     }
 
-    let result = [];
+    console.log(notes)
+    return false
+    
+
+    // result is the possible number for each grid Example : 123, 789 or 1357
     for(let i = 0; i < square; i++){
         result[i] = [];
         for(let j = 0; j < row; j++){
@@ -126,16 +103,21 @@ function showAns(){
     return false;
 }
 
-function probabilityCheck (sudoku, checkrow, checkcol, i, j, k){
+function probabilityCheck (i, j){
     let result = 0;
     let possible = 0;
-    let probability = [];
 
-    for(let i = 0; i < square; i++){
-        probability[i] = true;
+
+    // number that has possible to put in the grid
+    let probability = []
+    for(let i = 0; i < sudoku.length; i++){
+        probability[i] = i + 1
     }
 
-    let x;//because of  the naming style for small square box makes that need to be specific
+    //check row and col
+
+
+    let x;//because of the naming style for small square box makes that need to be specific
 
     //for checking row
     x = i - i % squareroot;
