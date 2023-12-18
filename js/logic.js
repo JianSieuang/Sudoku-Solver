@@ -1,11 +1,4 @@
-let sudoku = Array(9).fill().map(() => 
-             Array(9).fill(""));
-let square = 9;
-let squareroot = Math.sqrt(square);
-let row = 3;
-let column = 3;
-let checkrow = [];//[which row][which box]
-let checkcol = [];
+let sudoku = Array(9).fill().map(() => Array(9).fill(""));
 
 function checkAvailable() {
     let check = new Map()
@@ -58,195 +51,152 @@ function checkAvailable() {
     return true
 }
 
-// this logic only can function when there is one answer for one grid  
-
 function showAns(){
     // if checkAvailable is false (invalid sudoku), show the error and return false
+    // havent use it yet cus the algo havent finished
     console.log(checkAvailable()? "Valid Sudoku": "Invalid Sudoku")
-    
 
-    let notes = []
-    for (let i = 0; i < sudoku.length; i++) {
-        notes[i] = []
-        for (let j = 0; j < sudoku.length; j++) {
-            notes[i][j] = probabilityCheck(i, j)  
-        }
-    }
+    let loop
+    let notes = Array(sudoku.length).fill().map(() => Array(sudoku.length).fill());
 
-    console.log(notes)
-    return false
-    
-
-    // result is the possible number for each grid Example : 123, 789 or 1357
-    for(let i = 0; i < square; i++){
-        result[i] = [];
-        for(let j = 0; j < row; j++){
-            result[i][j] = [];
-            for(let k = 0; k < column; k++){
-                if(sudoku[i][j][k].value == ""){
-                    result[i][j][k] = probabilityCheck(sudoku, checkrow, checkcol, i, j, k);//how many numbers that can be wrote in the box
-                    //console.log(result[i][j][k]);
-                    //i need to create a variable to save possible numbers for each box.
-                }
-                else{
-                    result[i][j][k] = sudoku[i][j][k].value
-                }
+    // make a few function to write down the ans and loop them if success to find out ans
+    do {
+        // record all possible number for all grid
+        for (let i = 0; i < sudoku.length; i++) {
+            for (let j = 0; j < sudoku.length; j++) {
+                if (sudoku[i][j] == "")
+                    notes[i][j] = probabilityCheck(i, j)
+                else
+                    notes[i][j] = []
             }
         }
-        //checking row and column
-        //if another two row didn't appear that number means that this row must include that number 
-        for(let a = 0; a < row; a++){
-            rowcheck(i, a, result, checkrow, sudoku);
-            columncheck(i, a, result, checkcol, sudoku);
-        }
-    }
-    return false;
+
+        loop = writeAns(notes)
+    } while (false)
+
+    return false
 }
 
-function probabilityCheck (i, j){
-    let result = 0;
-    let possible = 0;
-
-
-    // number that has possible to put in the grid
-    let probability = []
-    for(let i = 0; i < sudoku.length; i++){
-        probability[i] = i + 1
-    }
+function probabilityCheck (x, y){
+    // number that has possibility to put in the grid
+    let probability = Array(sudoku.length).fill(true)
 
     //check row and col
-
-
-    let x;//because of the naming style for small square box makes that need to be specific
-
-    //for checking row
-    x = i - i % squareroot;
-    for(let a = x; a < x + squareroot; a++){
-        for(let c = 0; c < squareroot; c++){
-            for(let p = 0; p < square; p++){
-                if(sudoku[a][j][c].value == p + 1)
-                    probability[p] = false;
-            } 
-        }
+    for (let i = 0; i < sudoku.length; i++) {
+        if (sudoku[x][i] != "")
+            probability[sudoku[x][i] - 1] = false
+        if (sudoku[i][y] != "")
+            probability[sudoku[i][y] - 1] = false
     }
-    //problem
-    // row
-    for(let b = 0; b < squareroot; b++){
-        if(i % squareroot == b){//skip the same square box
-            continue;
-        }
-        let store = checkrow[j + x][b];
-        for(;checkrow[j + x][b] > 0; checkrow[j + x][b] = Math.trunc(checkrow[j + x][b] / 10)){
-            probability[checkrow[j + x][b] % 10 - 1] = false;
-        }
-        checkrow[j + x][b] = store;
-    }
+    
+    //check which box
+    let size = Math.sqrt(sudoku.length)
+    let positionX = Math.floor(x / size) * size
+    let positionY = Math.floor(y / size) * size
 
-    //for checking small square
-    for(let b = 0; b < squareroot; b++){
-        for(let c = 0; c < squareroot; c++){
-            for(let p = 0; p < square; p++){
-                if(sudoku[i][b][c].value == p + 1)
-                    probability[p] = false;
-            }
+    // check small box
+    for (let i = positionX; i < positionX + size; i++) {
+        for (let j = positionY; j < positionY + size; j++) {
+            if (sudoku[i][j] != "")
+                probability[sudoku[i][j] - 1] = false
         }
     }
 
-    //for checking column
-    x = i % squareroot;
-
-    for(let a = x; a < x + 1 + squareroot * (squareroot - 1); a += squareroot){
-        for(let b = 0; b < squareroot; b++){
-            for(let p = 0; p < square; p++){
-            if(sudoku[a][b][k].value == p + 1)
-                probability[p] = false;
-            }
-        }
-    }
-
-    //problem
-    //column
-    for(let b = 0; b < squareroot; b++){
-        if(Math.trunc(i / 3) == b){//for skip the same square box
-            continue;
-        }
-        let store = checkcol[k + x * squareroot][b];
-        for(;checkcol[k + x * squareroot][b] > 0; checkcol[k + x * squareroot][b] = Math.trunc(checkcol[k + x * squareroot][b] / 10)){
-            probability[checkcol[k + x * squareroot][b] % 10 - 1] = false;
-        }
-        checkcol[k + x * squareroot][b] = store;
-    }
-
-    for(let p = 0; p < square; p++){
-        if(probability[p]){
-            result++;
-            possible = possible * 10 + p + 1;
-        }   
-    }
-
-    for(let p = 0; p < square; p++){
-        if(probability[p] && result == 1){
-            sudoku[i][j][k].value = p + 1;
-            sudoku[i][j][k].style.color = "blue";
-            //lol this is shit
-        }
-    }
-
-    return possible;
+    return probability
 }
 
-function rowcheck(i, r, result, checkrow, sudoku){
-    let probability = [];
-    for(let p = 0; p < square; p++){
-        probability[p] = true;
+function writeAns(notes) {
+    // check the changes happend or not
+    let box = Math.sqrt(sudoku.length)
+    let change = false
+    let num
+
+    notes.forEach((note, x) => {
+        // write the number if the grid only have one number possible
+        for (let i = 0; i < sudoku.length; i++) {
+            for (let j = y = z = 0; j < sudoku.length; j++) {
+                if (note[i][j]) {
+                    z++
+                    num = j + 1
+                    y = i
+                }
+            }
+
+            if (z == 1) {
+                change = write(notes, x, y, num)
+            }
+        }
+        // write the number if that row only one grid remaining for that certain number
+        for (let i = 0; i < sudoku.length; i++) {
+            for (let j = y = z = 0; j < sudoku.length; j++) {
+                if (note[j][i]) {
+                    z++
+                    num = i + 1
+                    y = j
+                }     
+            }
+
+            if (z == 1) {
+                change = write(notes, x, y, num)
+            }
+        }
+    })
+
+    // write the number if that col only one grid remaining for that certain number
+    for (let i = 0; i < sudoku.length; i++) {
+        for (let j = 0; j < sudoku.length; j++) {
+            for (let k = x = y = z = 0; k < sudoku.length; k++) {
+                //check the first number in first col (loop the k)
+                //then check the next number in first row (loop the j)
+                //then change the row (loop the i)
+                if (notes[k][i][j]) {
+                    z++
+                    num = j + 1
+                    x = k
+                    y = i
+                }
+            }
+
+            if (z == 1) {
+                change = write(notes, x, y, num)
+            }
+        }
     }
 
-    for(let j = 0; j < row; j++){
-        for(let k = 0; k < column; k++){
-            if(r == j){
-                continue;
+
+    // problem 
+    // write the number if that box only one grid remaining for that certain number
+    // I and J is for jumping box by box
+    for (let I = 0; I < sudoku.length; I += box) {
+        for (let J = 0; J < sudoku.length; J += box) {
+            // i is for checking number one by one
+            for (let i = 0; i < sudoku.length; i++) {  
+                // j and k is check all grid in box 
+                for (let j = x = y = z = 0; j < box; j++) {
+                    for (let k = 0; k < box; k++) {
+                        if (notes[I + j][J + k][i]) {
+                            z++
+                            num = i + 1
+                            x = I + j
+                            y = J + k
+                        }
+                    }
+                }
+
+                if (z == 1) {
+                    change = write(notes, x, y, num)
+                }
             }
-            let store = result[i][j][k];
-            for(; result[i][j][k] > 0; result[i][j][k] = Math.trunc(result[i][j][k] / 10)){
-                probability[result[i][j][k] % 10 - 1] = false; 
-            }
-            result[i][j][k] = store;
         }
     }
     
-    //if that row got one empty then put the number 
-
-    for(let p = 0; p < square; p++){
-        if(probability[p]){
-            checkrow[r + Math.trunc(i / 3) * 3][i % 3] = checkrow[r + Math.trunc(i / 3) * 3][i % 3] * 10 + p + 1;
-        }   
-    }
+    return change
 }
 
-function columncheck(i, c, result, checkcol, sudoku){
-    let probability = [];
-    for(let p = 0; p < square; p++){
-        probability[p] = true;
-    }
-
-    for(let j = 0; j < row; j++){
-        for(let k = 0; k < column; k++){
-            if(c == k){
-                continue;
-            }
-            
-            let store = result[i][j][k];
-            for(; result[i][j][k] > 0; result[i][j][k] = Math.trunc(result[i][j][k] / 10) ){
-                probability[result[i][j][k] % 10 - 1] = false;
-                
-            }
-            result[i][j][k] = store;
-        }
-    }
-            
-    for(let p = 0; p < square; p++){
-        if(probability[p]){
-            checkcol[c + i % 3 * 3][Math.trunc(i / 3)] = checkcol[c + i % 3 * 3][Math.trunc(i / 3)] * 10 + p + 1;
-        }   
-    }
+function write(notes, x, y, num) {
+    sudoku[x][y] = `${num}`
+    notes[x][y] = []
+    document.getElementById(y + x * sudoku.length).value = num
+    document.getElementById(y + x * sudoku.length).style.color = "blue"
+    return true
 }

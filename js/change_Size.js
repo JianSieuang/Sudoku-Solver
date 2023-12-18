@@ -10,4 +10,5 @@ function changeSize(num) {
              Array(num).fill(""));
 
     autoFocus()
+    toggleList()
 }

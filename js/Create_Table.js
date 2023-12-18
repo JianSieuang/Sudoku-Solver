@@ -1,8 +1,7 @@
 document.body.onload = addElement(9)
 
-function addElement(num) {
+function addElement(size) {
     let position = [];
-    let size = num
     let boxsize = Math.sqrt(size)
 
     // create class name attribute for table 

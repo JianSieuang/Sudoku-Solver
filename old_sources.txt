@@ -396,3 +396,45 @@ js possible checking
 
         return possible;
     }
+
+js find possible i think
+    // result is the possible number for each grid Example : 123, 789 or 1357
+    for(let i = 0; i < square; i++){
+        result[i] = [];
+        for(let j = 0; j < row; j++){
+            result[i][j] = [];
+            for(let k = 0; k < column; k++){
+                if(sudoku[i][j][k].value == ""){
+                    result[i][j][k] = probabilityCheck(sudoku, checkrow, checkcol, i, j, k);//how many numbers that can be wrote in the box
+                    //console.log(result[i][j][k]);
+                    //i need to create a variable to save possible numbers for each box.
+                }
+                else{
+                    result[i][j][k] = sudoku[i][j][k].value
+                }
+            }
+        }
+        //checking row and column
+        //if another two row didn't appear that number means that this row must include that number 
+        for(let a = 0; a < row; a++){
+            rowcheck(i, a, result, checkrow, sudoku);
+            columncheck(i, a, result, checkcol, sudoku);
+        }
+    }
+    return false;
+
+js hide ans
+    for(let i = 0; i < square; i++){
+        sudoku[i] = [];
+        for(let j = 0; j < row; j++){
+            sudoku[i][j] = [];
+            for(let k = 0; k < column; k++){
+                sudoku[i][j][k] = document.getElementById(`s${i}r${j}c${k}`);
+                if(sudoku[i][j][k].style.color == "blue"){//remove the ans
+                    sudoku[i][j][k].value = "";
+                    sudoku[i][j][k].style.color = "black"; 
+                }
+            }
+        }
+    }
+    return false;
