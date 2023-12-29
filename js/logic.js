@@ -72,7 +72,7 @@ function showAns(){
         }
 
         loop = writeAns(notes)
-    } while (false)
+    } while (loop)
 
     return false
 }
@@ -108,14 +108,12 @@ function probabilityCheck (x, y){
 function writeAns(notes) {
     // check the changes happend or not
     let box = Math.sqrt(sudoku.length)
-    let change = false
     let num
-
-    notes.forEach((note, x) => {
+    for (let x = 0; x < sudoku.length; x++) {
         // write the number if the grid only have one number possible
         for (let i = 0; i < sudoku.length; i++) {
             for (let j = y = z = 0; j < sudoku.length; j++) {
-                if (note[i][j]) {
+                if (notes[x][i][j]) {
                     z++
                     num = j + 1
                     y = i
@@ -123,13 +121,18 @@ function writeAns(notes) {
             }
 
             if (z == 1) {
-                change = write(notes, x, y, num)
+                write(notes, x, y, num)
+                console.log("1", x, y, num)
+                return true
             }
         }
+    }
+
+    for (let x = 0; x < sudoku.length; x++) {
         // write the number if that row only one grid remaining for that certain number
         for (let i = 0; i < sudoku.length; i++) {
             for (let j = y = z = 0; j < sudoku.length; j++) {
-                if (note[j][i]) {
+                if (notes[x][j][i]) {
                     z++
                     num = i + 1
                     y = j
@@ -137,10 +140,12 @@ function writeAns(notes) {
             }
 
             if (z == 1) {
-                change = write(notes, x, y, num)
+                write(notes, x, y, num)
+                console.log("2", x, y, num)
+                return true
             }
         }
-    })
+    }
 
     // write the number if that col only one grid remaining for that certain number
     for (let i = 0; i < sudoku.length; i++) {
@@ -158,13 +163,13 @@ function writeAns(notes) {
             }
 
             if (z == 1) {
-                change = write(notes, x, y, num)
+                write(notes, x, y, num)
+                console.log("3", x, y, num)
+                return true
             }
         }
     }
 
-
-    // problem 
     // write the number if that box only one grid remaining for that certain number
     // I and J is for jumping box by box
     for (let I = 0; I < sudoku.length; I += box) {
@@ -184,13 +189,15 @@ function writeAns(notes) {
                 }
 
                 if (z == 1) {
-                    change = write(notes, x, y, num)
+                    write(notes, x, y, num)
+                    console.log("4", x, y, num)
+                    return true
                 }
             }
         }
     }
     
-    return change
+    return false
 }
 
 function write(notes, x, y, num) {
@@ -198,5 +205,4 @@ function write(notes, x, y, num) {
     notes[x][y] = []
     document.getElementById(y + x * sudoku.length).value = num
     document.getElementById(y + x * sudoku.length).style.color = "blue"
-    return true
 }
