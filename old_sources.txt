@@ -261,7 +261,7 @@ html table content
                 </td>
             </tr>
 
-js nextSibling
+js nextSibling (the current function is in the file Auto_Focus.js)
             let parentTag = input.parentNode.nextSibling; 
             console.log(parentTag)  
             while(parentTag){
@@ -276,7 +276,7 @@ js nextSibling
                 parentTag = parentTag.nextSibling;
             }
 
-js reset data
+js reset data (the current function is in the file small_Function.js)
     for(let i = 0; i < square; i++){
         sudoku[i] = [];
         for(let j = 0; j < row; j++){
@@ -291,7 +291,7 @@ js reset data
     }
     return false;
 
-js create sudoku value
+js create sudoku value 
     for(let i = 0; i < square; i++){
         //i = small square
         sudoku[i] = [];
@@ -397,7 +397,7 @@ js possible checking
         return possible;
     }
 
-js find possible i think
+js find possible i think..
     // result is the possible number for each grid Example : 123, 789 or 1357
     for(let i = 0; i < square; i++){
         result[i] = [];
@@ -423,7 +423,7 @@ js find possible i think
     }
     return false;
 
-js hide ans
+js hide ans (the current function is in the file small_Function.js)
     for(let i = 0; i < square; i++){
         sudoku[i] = [];
         for(let j = 0; j < row; j++){

@@ -1,6 +1,4 @@
-setTimeout(() =>{
-    autoFocus()
-}, 100)
+setTimeout(autoFocus, 100)
 
 function autoFocus() {
     const inputs = document.querySelectorAll("input")
@@ -63,6 +61,6 @@ function autoFocus() {
 
         input.addEventListener(`focus`, () =>{
             input.select()
-        })
+        })  
     })
 }

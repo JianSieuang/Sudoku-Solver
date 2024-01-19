@@ -32,11 +32,11 @@ function checkAvailable() {
     // check box
     for (let i = 0; i < sudoku.length; i += box) {
         for (let j = 0; j < sudoku.length; j += box) {
-            for (let r = 0; r < box; r++) {
-                for (let c = 0; c < box; c++) {
-                    if (sudoku[i + r][j + c] != "") {
-                        if (check.get(sudoku[i + r][j + c]) == undefined){
-                            check.set(sudoku[i + r][j + c], 0)
+            for (let r = i; r < i + box; r++) {
+                for (let c = j; c < j + box; c++) {
+                    if (sudoku[r][c] != "") {
+                        if (check.get(sudoku[r][c]) == undefined){
+                            check.set(sudoku[r][c], 0)
                         }
                         else {
                             return false
@@ -59,21 +59,23 @@ function showAns(){
     let loop
     let notes = Array(sudoku.length).fill().map(() => Array(sudoku.length).fill());
 
+    // record all possible number for all grid
+    for (let i = 0; i < sudoku.length; i++) {
+        for (let j = 0; j < sudoku.length; j++) {
+            if (sudoku[i][j] == "")
+                notes[i][j] = probabilityCheck(i, j)
+            else
+            notes[i][j] = Array(sudoku.length).fill(false)
+        }
+    }
+    // there is one way that no need to rewrite the notes
+    // is write the ans and change the the possible of that row, col and box
+
     // make a few function to write down the ans and loop them if success to find out ans
     do {
-        // record all possible number for all grid
-        for (let i = 0; i < sudoku.length; i++) {
-            for (let j = 0; j < sudoku.length; j++) {
-                if (sudoku[i][j] == "")
-                    notes[i][j] = probabilityCheck(i, j)
-                else
-                    notes[i][j] = []
-            }
-        }
-
+        filterPossible(notes)
         loop = writeAns(notes)
     } while (loop)
-
     return false
 }
 
@@ -205,4 +207,33 @@ function write(notes, x, y, num) {
     notes[x][y] = []
     document.getElementById(y + x * sudoku.length).value = num
     document.getElementById(y + x * sudoku.length).style.color = "blue"
+
+    //rewrite the probability
+    //col and row
+    for (let i = 0; i < sudoku.length; i++) {
+        if (sudoku[i][y] == "")
+            notes[i][y] = probabilityCheck(i, y)
+        else
+            notes[i][y] = Array(sudoku.length).fill(false)
+
+        if (sudoku[x][i] == "")
+            notes[x][i] = probabilityCheck(x, i)
+        else
+            notes[x][i] = Array(sudoku.length).fill(false)
+    }
+
+    //check which box
+    let size = Math.sqrt(sudoku.length)
+    let positionX = Math.floor(x / size) * size
+    let positionY = Math.floor(y / size) * size
+
+    // check small box
+    for (let i = positionX; i < positionX + size; i++) {
+        for (let j = positionY; j < positionY + size; j++) {
+            if (sudoku[i][j] == "")
+                notes[i][j] = probabilityCheck(i, j)
+            else
+                notes[i][j] = Array(sudoku.length).fill(false)
+        }
+    }
 }
