@@ -15,6 +15,9 @@ function filterPossible(notes){
             filterinnerbox(notes, I, J)
         }
     }
+
+    // need to store the number if the certain number just appear in certain row or col in the box
+    // which means that same row but different boxes are not allow to put that number
     // outside small box, between box and box
 
     for (let I = 0; I < sudoku.length; I += box) {
@@ -99,29 +102,28 @@ function rewrite(notes, indexes, temp, I, J) {
 
 // function for outer box
 function filterouterbox(notes, I, J) {
-    let box = Math.sqrt(sudoku.length) 
-    let possible = Array(sudoku.length).fill().map(() => Array(box).fill().map(() => Array(box).fill(false)))
+    let box = Math.sqrt(sudoku.length)
 
-    let count = 0
+    let rowcheck = []
+    let colcheck = []
     for (let p = 0; p < sudoku.length; p++) {
         for (let i = I; i < box + I; i++) {
             for (let j = J; j < box + J; j++) {
                 if (notes[i][j][p]) {
-                    count++
+                    rowcheck[i % box]++
+                    colcheck[j % box]++
                 }
             }
         }
         
-        if (count <= box) {
-            // filter other possible number that more than 3 
-            // row and col check
-            for (let i = I; i < box + I; i++) {
-                for (let j = J; j < box + J; j++) {
-                    
-                }
-            }
+        for (let i = 0; i < box; i++) {
+            
         }
 
+
+
+        rowcheck = []
+        colcheck = []
     }
     
 
